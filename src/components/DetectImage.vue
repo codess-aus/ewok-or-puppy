@@ -31,7 +31,7 @@ data() {
       model: null,
       predictions: [],
       image: 0,
-      numImages: 21
+      numImages: 25
     };
   },
    // return the index of the image
