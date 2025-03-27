@@ -1,4 +1,4 @@
-# i-or-j
+# Ewok or Puppy
 
 ## Project setup
 ```
