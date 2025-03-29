@@ -3,14 +3,9 @@
     <!-- Header -->
     <header class="bg-white dark:bg-gray-900 sticky top-0 z-10 border-b border-gray-100 dark:border-gray-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Changed the header structure to center the title -->
-        <div class="flex flex-col py-4">
-          <!-- Title container with explicit centering -->
-          <div class="flex justify-center w-full">
-            <h1 class="text-4xl md:text-6xl font-bold text-primary-700 dark:text-primary-400 py-3">Ewok or Puppy?</h1>
-          </div>
-          <!-- Theme toggle positioned on the right -->
-          <div class="absolute top-6 right-6 sm:right-8 lg:right-12">
+        <div class="flex flex-col items-center py-4">
+          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-primary-700 dark:text-primary-400 text-center">Ewok or Puppy?</h1>
+          <div class="mt-4 sm:mt-6">
             <ThemeToggle />
           </div>
         </div>
@@ -32,7 +27,7 @@
     <footer class="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 mt-12">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         <div class="flex flex-col md:flex-row justify-between items-center">
-          <p class="text-sm text-gray-500 dark:text-gray-400">
+          <p class="text-sm sm:text-base text-gray-500 dark:text-gray-400 text-center md:text-left">
             &copy; {{ new Date().getFullYear() }} Ewok or Puppy Detector. May the Fluff be with you.
           </p>
         </div>

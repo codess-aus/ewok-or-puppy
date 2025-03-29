@@ -1,21 +1,21 @@
 <template>
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-5xl font-bold text-center mb-12">{{ msg }}</h1>
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <h1 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12">{{ msg }}</h1>
     
     <!-- Main content section -->
-    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-4 sm:gap-6 lg:gap-8">
       <!-- Left column: Image and predictions (spans 3 columns) -->
-      <div class="lg:col-span-3 space-y-6">
+      <div class="lg:col-span-3 space-y-4 sm:space-y-6">
         <!-- Image card with elegant loading state -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-          <div class="relative h-[400px] bg-gray-100 dark:bg-gray-800">
+          <div class="relative h-[300px] sm:h-[400px] bg-gray-100 dark:bg-gray-800">
             <!-- Loading overlay -->
             <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center z-10 bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm">
               <div class="flex flex-col items-center">
-                <div class="animate-spin h-8 w-8 text-primary-600 dark:text-primary-400 mb-3">
+                <div class="animate-spin h-6 w-6 sm:h-8 sm:w-8 text-primary-600 dark:text-primary-400 mb-3">
                   <div class="w-full h-full rounded-full border-4 border-transparent border-t-current border-l-current"></div>
                 </div>
-                <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Loading image...</span>
+                <span class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Loading image...</span>
               </div>
             </div>
             
@@ -23,7 +23,7 @@
             <div class="flex items-center justify-center h-full w-full">
               <img 
                 :key="imageIndex"
-                class="max-h-[400px] w-auto object-contain select-none"
+                class="max-h-[300px] sm:max-h-[400px] w-auto object-contain select-none"
                 ref="imgRef" 
                 :src="currentImageSrc" 
                 @load="onImageLoad" 
@@ -36,36 +36,36 @@
           </div>
           
           <!-- Modern Controls -->
-          <div class="p-5 border-t border-gray-200 dark:border-gray-700">
+          <div class="p-4 sm:p-5 border-t border-gray-200 dark:border-gray-700">
             <div class="flex items-center justify-between">
               <button 
                 @click="prev" 
                 :disabled="imageIndex === 1"
-                class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
                        hover:bg-primary-200 hover:scale-110 hover:shadow-lg dark:hover:bg-primary-900/40 hover:text-primary-600 
                        dark:hover:text-primary-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
                        disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:hover:shadow-none
                        transition-all duration-300"
               >
                 <span class="sr-only">Previous</span>
-                <svg class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
               </button>
               
-              <span class="text-sm font-medium text-gray-600 dark:text-gray-300">Image {{ imageIndex }} of {{ numImages }}</span>
+              <span class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Image {{ imageIndex }} of {{ numImages }}</span>
               
               <button 
                 @click="next"
                 :disabled="imageIndex === numImages"
-                class="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
                        hover:bg-primary-200 hover:scale-110 hover:shadow-lg dark:hover:bg-primary-900/40 hover:text-primary-600 
                        dark:hover:text-primary-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
                        disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:hover:shadow-none
                        transition-all duration-300"
               >
                 <span class="sr-only">Next</span>
-                <svg class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
+                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
                 </svg>
               </button>
@@ -74,26 +74,26 @@
         </div>
 
         <!-- Predictions -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-5 transition-all duration-300">
-          <h2 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">AI Analysis Results</h2>
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-5 transition-all duration-300">
+          <h2 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">AI Analysis Results</h2>
           
-          <div v-if="isLoading && predictions.length === 0" class="space-y-3 animate-pulse">
+          <div v-if="isLoading && predictions.length === 0" class="space-y-2 sm:space-y-3 animate-pulse">
             <div v-for="i in 2" :key="i">
-              <div class="flex justify-between items-center mb-2">
-                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-24"></div>
-                <div class="h-4 bg-gray-200 dark:bg-gray-700 rounded w-10"></div>
+              <div class="flex justify-between items-center mb-1 sm:mb-2">
+                <div class="h-3 sm:h-4 bg-gray-200 dark:bg-gray-700 rounded w-20 sm:w-24"></div>
+                <div class="h-3 sm:h-4 bg-gray-200 dark:bg-gray-700 rounded w-8 sm:w-10"></div>
               </div>
-              <div class="h-2 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
+              <div class="h-1.5 sm:h-2 bg-gray-200 dark:bg-gray-700 rounded-full"></div>
             </div>
           </div>
 
-          <div v-else class="space-y-4">
+          <div v-else class="space-y-3 sm:space-y-4">
             <div v-for="pred in predictions" :key="pred.index" class="prediction-item group">
-              <div class="flex justify-between items-center mb-2">
+              <div class="flex justify-between items-center mb-1 sm:mb-2">
                 <span class="font-medium text-gray-900 dark:text-white transition-all group-hover:text-primary-600 dark:group-hover:text-primary-400">
                   {{ pred.label }}
                 </span>
-                <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                <span class="text-xs sm:text-sm font-medium text-gray-500 dark:text-gray-400">
                   {{ pred.probability.toFixed(0) }}%
                 </span>
               </div>
@@ -106,18 +106,18 @@
                 ></div>
               </div>
             </div>
-            <div v-if="predictions.length === 0 && !isLoading" class="text-center py-4 text-gray-500 dark:text-gray-400">
-              <svg class="w-10 h-10 mx-auto mb-2 text-gray-400 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <div v-if="predictions.length === 0 && !isLoading" class="text-center py-3 sm:py-4 text-gray-500 dark:text-gray-400">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 mx-auto mb-2 text-gray-400 dark:text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
               </svg>
-              <p>No predictions available</p>
+              <p class="text-xs sm:text-sm">No predictions available</p>
             </div>
           </div>
         </div>
       </div>
 
       <!-- Right column: Fun fact and AI info (spans 2 columns) -->
-      <div class="lg:col-span-2 space-y-6">
+      <div class="lg:col-span-2 space-y-4 sm:space-y-6">
         <!-- Fun Fact Card -->
         <div class="rounded-xl shadow-lg overflow-hidden"
              :class="{
@@ -125,10 +125,10 @@
                'bg-rose-50 dark:bg-rose-900/30': currentFact.type === 'puppy',
                'bg-amber-50 dark:bg-amber-900/30': currentFact.type === 'similarity'
              }">
-          <div class="p-5">
-            <div class="flex items-center gap-x-4 text-xs mb-4">
+          <div class="p-4 sm:p-5">
+            <div class="flex items-center gap-x-3 sm:gap-x-4 text-xs sm:text-sm mb-3 sm:mb-4">
               <span class="text-gray-500 dark:text-gray-400">Fun Fact #{{ imageIndex }}</span>
-              <span class="relative z-10 rounded-full px-3 py-1.5 font-medium"
+              <span class="relative z-10 rounded-full px-2.5 sm:px-3 py-1.5 font-medium"
                     :class="{
                       'bg-indigo-200 text-indigo-800 dark:bg-indigo-800 dark:text-indigo-200': currentFact.type === 'ewok',
                       'bg-rose-200 text-rose-800 dark:bg-rose-800 dark:text-rose-200': currentFact.type === 'puppy',
@@ -137,16 +137,16 @@
                 {{ currentFact.category }}
               </span>
             </div>
-            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ currentFact.title }}</h3>
-            <p class="text-sm text-gray-600 dark:text-gray-300">{{ currentFact.description }}</p>
+            <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2 sm:mb-3">{{ currentFact.title }}</h3>
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300">{{ currentFact.description }}</p>
           </div>
         </div>
 
         <!-- AI Tool Info -->
-        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4">
-          <h2 class="text-sm font-semibold text-gray-900 dark:text-white mb-3">About the AI Tool</h2>
-          <div class="space-y-3">
-            <p class="text-xs text-gray-600 dark:text-gray-300">Our model runs entirely in your browser, ensuring fast results and complete privacy. It is trained to spot subtle differences between Ewoks and puppies, analyzing images for distinctive features with high confidence predictions.</p>
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 sm:p-5">
+          <h2 class="text-sm sm:text-base font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">About the AI Tool</h2>
+          <div class="space-y-2 sm:space-y-3">
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-300">Our model runs entirely in your browser, ensuring fast results and complete privacy. It is trained to spot subtle differences between Ewoks and puppies, analyzing images for distinctive features with high confidence predictions.</p>
           </div>
         </div>
       </div>
@@ -308,7 +308,6 @@ watch(imageIndex, (newIndex) => {
   if (newIndex > 1) {
     const prevIdx = newIndex - 1;
     if (!preloadedImages[prevIdx]) {
-      preloadedImages[prevIdx] = new Image();
       preloadedImages[prevIdx].src = new URL(`/src/assets/images/${prevIdx}.jpg`, import.meta.url).href;
     }
   }
