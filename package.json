@@ -1,29 +1,33 @@
 {
-  "name": "i-or-j",
-  "version": "0.1.0",
+  "name": "ewok-or-puppy",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "register-service-worker": "^1.7.1",
+    "@headlessui/vue": "^1.7.23",
+    "@heroicons/vue": "^2.2.0",
+    "@tensorflow/tfjs": "^4.12.0",
+    "autoprefixer": "^10.4.21",
+    "core-js": "^3.33.2",
     "customvision-tfjs": "^1.0.1",
-    "vue": "^2.6.11"
+    "postcss": "^8.5.3",
+    "register-service-worker": "^1.7.2",
+    "tailwindcss": "^4.0.14",
+    "vue": "^3.3.7",
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.15",
-    "@vue/cli-plugin-eslint": "~4.5.15",
-    "@vue/cli-plugin-pwa": "~4.5.15",
-    "@vue/cli-service": "~4.5.15",
-    "babel-eslint": "^10.1.0",
-    "eslint": "^6.7.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "raw-loader": "^4.0.0",
-    "webpack-cli": "^3.3.10",
-    "vue-template-compiler": "^2.6.11"
+    "@vitejs/plugin-vue": "^4.4.0",
+    "@vue/eslint-config-standard": "^8.0.1",
+    "eslint": "^8.53.0",
+    "eslint-plugin-vue": "^9.18.1",
+    "vite": "^4.5.0",
+    "vite-plugin-pwa": "^0.16.5"
   },
   "eslintConfig": {
     "root": true,
@@ -31,11 +35,11 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-recommended",
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "ecmaVersion": 2022
     },
     "rules": {}
   },
