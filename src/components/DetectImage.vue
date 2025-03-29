@@ -8,67 +8,72 @@
       <div class="lg:col-span-3 space-y-4 sm:space-y-6">
         <!-- Image card with elegant loading state -->
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
-          <div class="relative h-[300px] sm:h-[400px] bg-gray-100 dark:bg-gray-800">
-            <!-- Loading overlay -->
-            <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center z-10 bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm">
-              <div class="flex flex-col items-center">
-                <div class="animate-spin h-6 w-6 sm:h-8 sm:w-8 text-primary-600 dark:text-primary-400 mb-3">
-                  <div class="w-full h-full rounded-full border-4 border-transparent border-t-current border-l-current"></div>
+          <div class="flex flex-col items-center">
+            <!-- Image container -->
+            <div class="relative w-[300px] h-[300px] bg-gray-100 dark:bg-gray-800">
+              <!-- Loading overlay -->
+              <div v-if="isLoading" class="absolute inset-0 flex items-center justify-center z-10 bg-gray-50/80 dark:bg-gray-700/80 backdrop-blur-sm">
+                <div class="flex flex-col items-center">
+                  <div class="animate-spin h-6 w-6 sm:h-8 sm:w-8 text-primary-600 dark:text-primary-400 mb-3">
+                    <div class="w-full h-full rounded-full border-4 border-transparent border-t-current border-l-current"></div>
+                  </div>
+                  <span class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Loading image...</span>
                 </div>
-                <span class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Loading image...</span>
+              </div>
+              
+              <!-- Fixed-size square image container with strict cropping -->
+              <div class="w-[300px] h-[300px] overflow-hidden">
+                <img 
+                  :key="imageIndex"
+                  class="w-full h-full object-cover select-none"
+                  ref="imgRef" 
+                  :src="currentImageSrc" 
+                  @load="onImageLoad" 
+                  alt="Detection image" 
+                  draggable="false"
+                  :style="{
+                    opacity: isLoading ? 0 : 1,
+                    transition: 'opacity 0.5s ease-in-out'
+                  }"
+                />
               </div>
             </div>
             
-            <!-- Image container -->
-            <div class="flex items-center justify-center h-full w-full">
-              <img 
-                :key="imageIndex"
-                class="max-h-[300px] sm:max-h-[400px] w-auto object-contain select-none"
-                ref="imgRef" 
-                :src="currentImageSrc" 
-                @load="onImageLoad" 
-                alt="Detection image" 
-                draggable="false"
-                :style="{opacity: isLoading ? 0 : 1}"
-                style="transition: opacity 0.5s ease-in-out;"
-              />
-            </div>
-          </div>
-          
-          <!-- Modern Controls -->
-          <div class="p-4 sm:p-5 border-t border-gray-200 dark:border-gray-700">
-            <div class="flex items-center justify-between">
-              <button 
-                @click="prev" 
-                :disabled="imageIndex === 1"
-                class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                       hover:bg-primary-200 hover:scale-110 hover:shadow-lg dark:hover:bg-primary-900/40 hover:text-primary-600 
-                       dark:hover:text-primary-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
-                       disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:hover:shadow-none
-                       transition-all duration-300"
-              >
-                <span class="sr-only">Previous</span>
-                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                </svg>
-              </button>
-              
-              <span class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Image {{ imageIndex }} of {{ numImages }}</span>
-              
-              <button 
-                @click="next"
-                :disabled="imageIndex === numImages"
-                class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
-                       hover:bg-primary-200 hover:scale-110 hover:shadow-lg dark:hover:bg-primary-900/40 hover:text-primary-600 
-                       dark:hover:text-primary-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
-                       disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:hover:shadow-none
-                       transition-all duration-300"
-              >
-                <span class="sr-only">Next</span>
-                <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                </svg>
-              </button>
+            <!-- Navigation Controls -->
+            <div class="p-4 sm:p-5 border-t border-gray-200 dark:border-gray-700 w-full">
+              <div class="flex items-center justify-between">
+                <button 
+                  @click="prev" 
+                  :disabled="imageIndex === 1"
+                  class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                        hover:bg-primary-200 hover:scale-110 hover:shadow-lg dark:hover:bg-primary-900/40 hover:text-primary-600 
+                        dark:hover:text-primary-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
+                        disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:hover:shadow-none
+                        transition-all duration-300"
+                >
+                  <span class="sr-only">Previous</span>
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+                
+                <span class="text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-300">Image {{ imageIndex }} of {{ numImages }}</span>
+                
+                <button 
+                  @click="next"
+                  :disabled="imageIndex === numImages"
+                  class="flex items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 
+                        hover:bg-primary-200 hover:scale-110 hover:shadow-lg dark:hover:bg-primary-900/40 hover:text-primary-600 
+                        dark:hover:text-primary-400 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
+                        disabled:hover:bg-gray-200 dark:disabled:hover:bg-gray-700 disabled:hover:shadow-none
+                        transition-all duration-300"
+                >
+                  <span class="sr-only">Next</span>
+                  <svg class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
